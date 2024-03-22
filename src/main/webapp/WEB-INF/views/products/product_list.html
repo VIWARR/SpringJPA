@@ -8,13 +8,13 @@
 
 <div th:each="product : ${products}">
     <a th:href="@{/product/id{id}(id=${product.getId()})}"
-       th:text="${product.getId() + ', ' + product.getName()}">product</a>
+       th:text="${product.getId() + ', ' + product.getNameProduct()}">product</a>
 </div>
 
 <br/>
 <hr/>
 
-<a href="/product/new">Создать новый продукт</a>
+<a href="/products/new">Создать новый продукт</a>
 
 </body>
 </html>
