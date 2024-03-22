@@ -4,28 +4,20 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "offer")
-public class Offer {
+@Table(name = "Variety")
+public class Variety {
 
     @Id
-    @Column(name = "id")
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
+    @ManyToMany
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
-    @Column(name = "price")
-    private double price;
-
-    public Offer() {
-    }
-
-    public Offer(Product product, double price) {
-        this.product = product;
-        this.price = price;
-    }
+    @Column(name = "name_variety")
+    private String nameVariety;
 
     public int getId() {
         return id;
@@ -43,33 +35,33 @@ public class Offer {
         this.product = product;
     }
 
-    public double getPrice() {
-        return price;
+    public String getNameVariety() {
+        return nameVariety;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setNameVariety(String nameVariety) {
+        this.nameVariety = nameVariety;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Offer offer = (Offer) o;
-        return id == offer.id && Double.compare(price, offer.price) == 0 && Objects.equals(product, offer.product);
+        Variety variety = (Variety) o;
+        return id == variety.id && Objects.equals(nameVariety, variety.nameVariety);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, product, price);
+        return Objects.hash(id, nameVariety);
     }
 
     @Override
     public String toString() {
-        return "Offer{" +
+        return "Variety{" +
                 "id=" + id +
                 ", product=" + product +
-                ", price=" + price +
+                ", nameVariety='" + nameVariety + '\'' +
                 '}';
     }
 }

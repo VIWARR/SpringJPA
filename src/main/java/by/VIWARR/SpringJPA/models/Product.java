@@ -3,10 +3,11 @@ package by.VIWARR.SpringJPA.models;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "product")
+@Table(name = "Product")
 public class Product {
 
     @Id
@@ -14,18 +15,17 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "name_product")
+    private String nameProduct;
 
-    @OneToOne (mappedBy = "product")
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    private Offer offer;
+    @OneToMany(mappedBy = "product")
+    private List<Variety> varieties;
 
-    public Product() {
+    public Product(){
     }
 
-    public Product(String name) {
-        this.name = name;
+    public Product(String nameProduct) {
+        this.nameProduct = nameProduct;
     }
 
     public int getId() {
@@ -36,12 +36,20 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNameProduct() {
+        return nameProduct;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameProduct(String nameProduct) {
+        this.nameProduct = nameProduct;
+    }
+
+    public List<Variety> getVarieties() {
+        return varieties;
+    }
+
+    public void setVarieties(List<Variety> varieties) {
+        this.varieties = varieties;
     }
 
     @Override
@@ -49,19 +57,20 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id && Objects.equals(name, product.name);
+        return id == product.id && Objects.equals(nameProduct, product.nameProduct);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, nameProduct);
     }
 
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", nameProduct='" + nameProduct + '\'' +
+                ", varieties=" + varieties +
                 '}';
     }
 }
