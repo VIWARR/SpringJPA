@@ -7,12 +7,12 @@
 <body>
 
 <h1>Информация о продукте</h1>
-<p th:text="${product.getName()}">Name</p>
+<p th:text="${product.getNameProduct().substring(0, 1).toUpperCase + product.getNameProduct().substring(1)}">Name</p>
 <p th:text="${product.getId()}">Id</p>
 
-<a th:href="@{/product/id{id}/edit(id=${product.getId()})}">Редактировать</a>
+<a th:href="@{/products/id{id}/edit(id=${product.getId()})}">Редактировать</a>
 
-<form th:method="DELETE" th:action="@{/product/id{id}(id=${product.getId()})}">
+<form th:method="DELETE" th:action="@{/products/id{id}(id=${product.getId()})}">
     <input type="submit" value="Удалить"/>
 </form>
 </body>

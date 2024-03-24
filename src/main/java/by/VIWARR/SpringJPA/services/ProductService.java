@@ -20,30 +20,36 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    /*----------------Отображение всех продуктов------------*/
     public List<Product> findAll() {
         return productRepository.findAll();
     }
 
-    public Product findOne(int id) {
-        Optional<Product> foundProduct = productRepository.findById(id); //Optional - т.к. продукт может быть или не может
-        return foundProduct.orElse(null); //если найдет то проудкт, если нет null
-    }
 
-    @Transactional //т.к. записываем, то убираем readOnly = true
+    /*-------------Сохранение продукта в БД------------*/
+    @Transactional
     public void save(String nameProduct) {
-        Product product = new Product(nameProduct);
+        Product product = new Product(nameProduct.toLowerCase());
         productRepository.save(product);
     }
 
+
+    /*---------------Поиск продукта по Id-----------*/
+    public Product findOne(int id){
+        Optional<Product> foundProduct = productRepository.findById(id);
+        return foundProduct.orElse(null);
+    }
+
+
+    /*--------------Редактирование продукта-------------*/
     @Transactional
-    public void update(int id, Product updateProduct) {
-        //в repository для обновления сущности и сохранения сущности используется один метод save
-        //поэтому мы вызываем setId, чтобы repository понял, что такой продукт существует
-        //продукт не будет сохраняться, он будет редактироваться
-        updateProduct.setId(id);
+    public void update(int id, String newProductName) {
+        Product updateProduct = findOne(id);
+        updateProduct.setNameProduct(newProductName);
         productRepository.save(updateProduct);
     }
 
+    /*-----------Удаление продукта------------*/
     @Transactional
     public void delete(int id) {
         productRepository.deleteById(id);

@@ -7,8 +7,8 @@
 <body>
 
 <div th:each="product : ${products}">
-    <a th:href="@{/product/id{id}(id=${product.getId()})}"
-       th:text="${product.getId() + ', ' + product.getNameProduct()}">product</a>
+    <a th:href="@{/products/id{id}(id=${product.getId()})}"
+       th:text="${product.getId() + ', ' + product.getNameProduct().substring(0, 1).toUpperCase() + product.getNameProduct().substring(1)}">product</a>
 </div>
 
 <br/>
