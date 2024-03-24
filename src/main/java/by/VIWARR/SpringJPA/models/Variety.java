@@ -19,6 +19,14 @@ public class Variety {
     @Column(name = "name_variety")
     private String nameVariety;
 
+    public Variety() {
+    }
+
+    public Variety(String nameVariety, Product product) {
+        this.nameVariety = nameVariety;
+        this.product = product;
+    }
+
     public int getId() {
         return id;
     }
