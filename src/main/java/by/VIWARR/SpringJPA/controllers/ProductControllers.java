@@ -1,6 +1,5 @@
 package by.VIWARR.SpringJPA.controllers;
 
-import by.VIWARR.SpringJPA.models.Product;
 import by.VIWARR.SpringJPA.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
