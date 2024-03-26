@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Сорт</title>
+</head>
+<body>
+
+<h1>Информация о продукте</h1>
+<p th:text="${variety.getProduct().getNameProduct().substring(0, 1).toUpperCase + variety.getProduct().getNameProduct().substring(1)}">Name</p>
+<p th:text="${variety.getNameVariety().substring(0, 1).toUpperCase + variety.getNameVariety().substring(1)}">Name</p>
+
+<a th:href="@{/variety/id{id}/edit(id=${variety.getId()})}">Редактировать</a>
+
+<form th:method="DELETE" th:action="@{/variety/id{id}(id=${variety.getId()})}">
+    <input type="submit" value="Удалить"/>
+</form>
+</body>
+</html>

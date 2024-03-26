@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Обновление сорта</title>
+</head>
+<body>
+<h1>Обновление продукта</h1>
+<form th:method="PATCH" th:action="@{/variety/id{id}(id=${variety.getId()})}" th:object="${variety}">
+
+    <label for="nameVariety">Введите имя: </label>
+    <input type="text" th:field="*{nameVariety}" id="nameVariety"/>
+    <br/>
+
+    <label for="product">Выберите продукт</label>
+    <select name="product" id="product">
+        <option th:value="${variety.getProduct().getId()}" th:text="${variety.getProduct.getNameProduct().substring(0, 1).toUpperCase() + variety.getProduct.getNameProduct().substring(1)}">
+        </option>
+
+        <option th:each="product : ${products}" th:value="${product.getId()}" th:text="${product.getNameProduct().substring(0, 1).toUpperCase() + product.getNameProduct().substring(1)}">
+        </option>
+    </select>
+
+    <input type="submit" value="Обновить"/>
+</form>
+
+</body>
+</html>
